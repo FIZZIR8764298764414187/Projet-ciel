@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="msapplication-TileImage" content="logo.jpg">
+    <title>FRhardware - Finalisez votre achat</title>
+    <link rel="icon" type="image/jpg" href="images/logo.jpg">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Styles généraux pour le corps de la page */
+        body {
+            font-family: 'Open Sans', sans-serif; /* Police moderne et professionnelle */
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8; /* Fond très clair, presque blanc */
+            color: #333; /* Couleur de texte par défaut */
+            line-height: 1.6; /* Hauteur de ligne pour une meilleure lisibilité */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* La page prend au moins toute la hauteur de la vue */
+            overflow-x: hidden; /* Empêche le défilement horizontal */
+        }
+
+        /* Styles de l'en-tête (copié et adapté des autres pages) */
+        header {
+            background-color: #ffffff; /* Fond blanc pour l'en-tête */
+            color: #1a202c; /* Texte sombre */
+            padding: 20px 50px; /* Espacement interne généreux */
+            display: flex; /* Utilisation de Flexbox pour l'alignement des éléments */
+            justify-content: space-between; /* Espacement équitable entre les éléments */
+            align-items: center; /* Alignement vertical au centre */
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08); /* Ombre douce et subtile */
+            position: sticky; /* L'en-tête reste en haut au défilement */
+            top: 0;
+            z-index: 100; /* Assure que l'en-tête est au-dessus des autres éléments */
+        }
+
+        header .logo {
+            font-family: 'Montserrat', sans-serif; /* Police distincte pour le logo */
+            font-size: 2.2em; /* Taille de police plus grande pour le logo */
+            font-weight: 700; /* Texte en gras */
+            letter-spacing: 0.5px; /* Espacement des lettres */
+        }
+
+        header .logo a {
+            color: #1a202c; /* Couleur sombre pour le logo */
+            text-decoration: none; /* Pas de soulignement */
+            transition: color 0.3s ease;
+        }
+
+        header .logo a:hover {
+            color: #007bff; /* Bleu vif au survol */
+        }
+
+        header nav ul {
+            list-style: none; /* Supprime les puces de liste */
+            margin: 0;
+            padding: 0;
+            display: flex; /* Utilisation de Flexbox pour les éléments de navigation */
+        }
+
+        header nav ul li {
+            margin-left: 40px; /* Espacement entre les éléments de navigation */
+        }
+
+        header nav ul li a {
+            color: #555; /* Gris moyen pour les liens de navigation */
+            text-decoration: none; /* Pas de soulignement */
+            font-size: 1.05em; /* Taille de police des liens */
+            font-weight: 500; /* Poids de police moyen */
+            transition: color 0.3s ease, transform 0.2s ease; /* Transitions douces */
+            position: relative;
+            padding-bottom: 5px; /* Espace pour la ligne de survol */
+        }
+
+        header nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #007bff; /* Ligne bleue au survol/actif */
+            transition: width 0.3s ease-in-out;
+        }
+
+        header nav ul li a:hover::after,
+        header nav ul li a.active::after {
+            width: 100%;
+        }
+
+        header nav ul li a:hover {
+            color: #1a202c; /* Noir au survol */
+            transform: translateY(-2px); /* Léger déplacement vers le haut */
+        }
+
+        header nav ul li a.active {
+            color: #1a202c;
+            font-weight: 600; /* Plus gras pour la page active */
+        }
+
+        /* Conteneur principal du formulaire de paiement */
+        main.payment-form-container {
+            flex-grow: 1; /* Prend l'espace restant */
+            max-width: 700px; /* Largeur maximale pour le formulaire */
+            margin: 40px auto 60px auto; /* Centrage horizontal avec marges */
+            padding: 40px; /* Espacement interne généreux */
+            background-color: #ffffff; /* Fond blanc pur */
+            border-radius: 15px; /* Coins très arrondis */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Ombre plus douce et plus étendue */
+        }
+
+        main.payment-form-container h1 {
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            color: #1a202c;
+            font-size: 2.8em; /* Grande taille pour le titre principal */
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        main.payment-form-container h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #007bff; /* Ligne accentuée sous le titre */
+            border-radius: 2px;
+        }
+
+        main.payment-form-container p {
+            text-align: center;
+            color: #555;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+        }
+
+        /* Styles pour chaque section du formulaire */
+        .section {
+            background-color: #fefefe; /* Fond légèrement plus clair pour les sections */
+            border: 1px solid #e9e9e9; /* Bordure très fine et douce */
+            border-radius: 12px; /* Coins arrondis */
+            padding: 25px; /* Espacement interne */
+            margin-bottom: 30px; /* Marge inférieure entre les sections */
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.04); /* Ombre légère pour chaque section */
+        }
+
+        .section h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #1a202c;
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #f0f0f0; /* Ligne de séparation douce */
+            padding-bottom: 15px;
+        }
+
+        /* Styles pour les labels et les champs de saisie */
+        label {
+            display: block; /* Chaque label sur sa propre ligne */
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #444;
+            font-size: 1.05em;
+        }
+
+        input[type="text"],
+        input[type="month"] {
+            width: calc(100% - 24px); /* Prend toute la largeur moins le padding */
+            padding: 12px;
+            margin-bottom: 20px; /* Espacement sous chaque champ */
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1.05em;
+            color: #333;
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.05);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="month"]:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+        }
+
+        /* Style spécifique pour le champ CVV */
+        #cvv {
+            width: 100px; /* Largeur fixe pour le CVV */
+            display: inline-block; /* Pour qu'il ne prenne pas toute la ligne */
+        }
+
+        /* Style du bouton de paiement */
+        #pay-button {
+            display: block; /* Le bouton prend toute la largeur disponible */
+            width: 100%;
+            background-color: #28a745; /* Vert pour le bouton Payer */
+            color: white;
+            padding: 18px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.4em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        #pay-button:hover {
+            background-color: #218838; /* Vert plus foncé au survol */
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        #pay-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
+        }
+
+        /* Pied de page (copié et adapté des autres pages) */
+        footer {
+            background-color: #1a202c; /* Même bleu très foncé que l'en-tête */
+            color: #cbd5e0; /* Gris clair pour le texte du pied de page */
+            text-align: center; /* Texte centré */
+            padding: 30px 0; /* Espacement interne */
+            margin-top: auto; /* Pousse le pied de page vers le bas */
+            font-size: 0.95em; /* Taille de police */
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Ombre au-dessus du pied de page */
+        }
+
+        footer p {
+            margin: 0;
+            margin-bottom: 15px; /* Marge inférieure */
+        }
+
+        .footer-links { /* Nouveau style pour les liens du pied de page */
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #cbd5e0;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #007bff;
+        }
+
+        .social-links a {
+            color: #cbd5e0; /* Couleur des liens sociaux */
+            font-size: 2em; /* Taille de police des icônes */
+            margin: 0 18px; /* Espacement entre les icônes */
+            transition: color 0.3s ease, transform 0.2s ease; /* Transitions douces */
+        }
+
+        .social-links a:hover {
+            color: #007bff; /* Bleu au survol */
+            transform: translateY(-4px); /* Léger déplacement vers le haut */
+        }
+
+        /* Media Queries pour la responsivité */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px 20px;
+            }
+            header .logo {
+                margin-bottom: 10px;
+            }
+            header nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            header nav ul li {
+                margin: 8px 15px;
+            }
+            main.payment-form-container {
+                margin: 20px 15px 40px auto;
+                padding: 25px;
+            }
+            main.payment-form-container h1 {
+                font-size: 2.2em;
+                margin-bottom: 15px;
+            }
+            main.payment-form-container h1::after {
+                width: 60px;
+            }
+            main.payment-form-container p {
+                font-size: 1em;
+                margin-bottom: 30px;
+            }
+            .section {
+                padding: 20px;
+                margin-bottom: 25px;
+            }
+            .section h2 {
+                font-size: 1.5em;
+                margin-bottom: 20px;
+            }
+            label {
+                font-size: 1em;
+                margin-bottom: 8px;
+            }
+            input[type="text"],
+            input[type="month"] {
+                padding: 10px;
+                margin-bottom: 15px;
+                font-size: 1em;
+            }
+            #cvv {
+                width: 80px;
+            }
+            #pay-button {
+                padding: 15px 20px;
+                font-size: 1.2em;
+            }
+            footer {
+                padding: 20px 0;
+            }
+            footer p {
+                margin-bottom: 10px;
+            }
+            .footer-links a {
+                margin: 0 10px;
+            }
+            .social-links a {
+                font-size: 1.6em;
+                margin: 0 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 10px 15px;
+            }
+            header .logo {
+                font-size: 1.8em;
+            }
+            header nav ul li {
+                margin: 5px 10px;
+            }
+            header nav ul li a {
+                font-size: 0.95em;
+            }
+            main.payment-form-container {
+                margin: 15px 10px 30px auto;
+                padding: 15px;
+            }
+            main.payment-form-container h1 {
+                font-size: 1.8em;
+            }
+            main.payment-form-container p {
+                font-size: 0.9em;
+            }
+            .section {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            .section h2 {
+                font-size: 1.3em;
+            }
+            input[type="text"],
+            input[type="month"] {
+                padding: 8px;
+                font-size: 0.95em;
+            }
+            #cvv {
+                width: 70px;
+            }
+            #pay-button {
+                padding: 12px 18px;
+                font-size: 1.1em;
+            }
+            footer {
+                padding: 15px 0;
+            }
+            footer p {
+                font-size: 0.85em;
+            }
+            .footer-links a {
+                font-size: 0.9em;
+                margin: 0 8px;
+            }
+            .social-links a {
+                font-size: 1.4em;
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html">FRhardware</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="produit.html">Configurateur</a></li>
+                <li><a href="condition.html">Conditions</a></li>
+                <li><a href="politique_confidentialite.html">Politique de Confidentialité</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="payment-form-container">
+        <h1>Finalisez votre achat</h1>
+        <p>Veuillez entrer vos informations de paiement pour compléter votre commande.</p>
+
+        <form id="payment-form">
+            <section class="section">
+                <h2><i class="fas fa-user"></i> Informations personnelles</h2>
+                <label for="name">Nom complet :</label>
+                <input type="text" id="name" name="name" placeholder="Votre nom" required>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-credit-card"></i> Informations de paiement</h2>
+                <label for="card-number">Numéro de carte :</label>
+                <input type="text" id="card-number" class="card-input" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" required>
+
+                <div style="display: flex; gap: 20px; align-items: flex-end;">
+                    <div style="flex-grow: 1;">
+                        <label for="expiration">Date d'expiration :</label>
+                        <input type="month" id="expiration" name="expiration" required>
+                    </div>
+                    <div>
+                        <label for="cvv">CVV :</label>
+                        <input type="text" id="cvv" name="cvv" placeholder="XXX" maxlength="3" required>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2><i class="fas fa-map-marker-alt"></i> Adresse de facturation</h2>
+                <label for="address">Adresse :</label>
+                <input type="text" id="address" name="address" placeholder="Adresse complète" required>
+
+                <label for="city">Ville :</label>
+                <input type="text" id="city" name="city" placeholder="Ville" required>
+
+                <label for="postal-code">Code postal :</label>
+                <input type="text" id="postal-code" name="postal-code" placeholder="Code postal" required>
+            </section>
+
+            <section class="section">
+                <button type="submit" id="pay-button">Payer</button>
+            </section>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FRhardware. Tous droits réservés.</p>
+        <div class="footer-links">
+            <a href="index.html">Accueil</a>
+            <a href="produit.html">Configurateur</a>
+            <a href="condition.html">Conditions Générales</a>
+            <a href="politique_confidentialite.html">Politique de Confidentialité</a>
+        </div>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const paymentForm = document.getElementById('payment-form');
+            const cardNumberInput = document.getElementById('card-number');
+            const expirationInput = document.getElementById('expiration');
+            const cvvInput = document.getElementById('cvv');
+
+            // Fonction pour formater le numéro de carte (espaces tous les 4 chiffres)
+            cardNumberInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s/g, ''); // Supprime les espaces existants
+                let formattedValue = '';
+                for (let i = 0; i < value.length; i++) {
+                    if (i > 0 && i % 4 === 0) {
+                        formattedValue += ' ';
+                    }
+                    formattedValue += value[i];
+                }
+                e.target.value = formattedValue;
+            });
+
+            paymentForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Empêche le rechargement de la page
+
+                let isValid = true;
+
+                // Validation simple du numéro de carte (16 chiffres après formatage)
+                const cardNumber = cardNumberInput.value.replace(/\s/g, '');
+                if (cardNumber.length !== 16 || !/^\d+$/.test(cardNumber)) {
+                    alert("Veuillez entrer un numéro de carte valide de 16 chiffres.");
+                    isValid = false;
+                }
+
+                // Validation de la date d'expiration (doit être dans le futur)
+                const expirationDate = new Date(expirationInput.value);
+                const now = new Date();
+                // Compare l'année et le mois
+                if (expirationDate.getFullYear() < now.getFullYear() ||
+                    (expirationDate.getFullYear() === now.getFullYear() && expirationDate.getMonth() < now.getMonth())) {
+                    alert("La date d'expiration de la carte est invalide.");
+                    isValid = false;
+                }
+
+                // Validation du CVV (3 chiffres)
+                const cvv = cvvInput.value;
+                if (cvv.length !== 3 || !/^\d+$/.test(cvv)) {
+                    alert("Veuillez entrer un CVV valide de 3 chiffres.");
+                    isValid = false;
+                }
+
+                if (isValid) {
+                    // Si toutes les validations passent
+                    alert("Paiement simulé réussi ! Votre commande est en cours de traitement.");
+                    // Ici, tu enverrais normalement les données à un serveur de paiement sécurisé.
+                    // Par exemple : fetch('/process_payment', { method: 'POST', body: new FormData(paymentForm) });
+                    paymentForm.reset(); // Réinitialise le formulaire après un paiement simulé
+                }
+            });
+        });
+    </script>
+</body>
+</html>

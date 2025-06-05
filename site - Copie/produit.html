@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="msapplication-TileImage" content="logo.jpg">
+    <title>FRhardware - Configurateur de PC Professionnel</title>
+    <link rel="icon" type="image/jpg" href="images/logo.jpg">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Styles généraux pour le corps de la page */
+        body {
+            font-family: 'Open Sans', sans-serif; /* Police moderne et professionnelle */
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8; /* Fond très clair, presque blanc */
+            color: #333; /* Couleur de texte par défaut */
+            line-height: 1.6; /* Hauteur de ligne pour une meilleure lisibilité */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* La page prend au moins toute la hauteur de la vue */
+            overflow-x: hidden; /* Empêche le défilement horizontal */
+        }
+
+        /* Styles de l'en-tête */
+        header {
+            background-color: #ffffff; /* Fond blanc pour l'en-tête */
+            color: #1a202c; /* Texte sombre */
+            padding: 20px 50px; /* Espacement interne généreux */
+            display: flex; /* Utilisation de Flexbox pour l'alignement des éléments */
+            justify-content: space-between; /* Espacement équitable entre les éléments */
+            align-items: center; /* Alignement vertical au centre */
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08); /* Ombre douce et subtile */
+            position: sticky; /* L'en-tête reste en haut au défilement */
+            top: 0;
+            z-index: 100; /* Assure que l'en-tête est au-dessus des autres éléments */
+        }
+
+        header .logo {
+            font-family: 'Montserrat', sans-serif; /* Police distincte pour le logo */
+            font-size: 2.2em; /* Taille de police plus grande pour le logo */
+            font-weight: 700; /* Texte en gras */
+            letter-spacing: 0.5px; /* Espacement des lettres */
+        }
+
+        header .logo a {
+            color: #1a202c; /* Couleur sombre pour le logo */
+            text-decoration: none; /* Pas de soulignement */
+            transition: color 0.3s ease;
+        }
+
+        header .logo a:hover {
+            color: #007bff; /* Bleu vif au survol */
+        }
+
+        header nav ul {
+            list-style: none; /* Supprime les puces de liste */
+            margin: 0;
+            padding: 0;
+            display: flex; /* Utilisation de Flexbox pour les éléments de navigation */
+        }
+
+        header nav ul li {
+            margin-left: 40px; /* Espacement entre les éléments de navigation */
+        }
+
+        header nav ul li a {
+            color: #555; /* Gris moyen pour les liens de navigation */
+            text-decoration: none; /* Pas de soulignement */
+            font-size: 1.05em; /* Taille de police des liens */
+            font-weight: 500; /* Poids de police moyen */
+            transition: color 0.3s ease, transform 0.2s ease; /* Transitions douces */
+            position: relative;
+            padding-bottom: 5px; /* Espace pour la ligne de survol */
+        }
+
+        header nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #007bff; /* Ligne bleue au survol/actif */
+            transition: width 0.3s ease-in-out;
+        }
+
+        header nav ul li a:hover::after,
+        header nav ul li a.active::after {
+            width: 100%;
+        }
+
+        header nav ul li a:hover {
+            color: #1a202c; /* Noir au survol */
+            transform: translateY(-2px); /* Léger déplacement vers le haut */
+        }
+
+        header nav ul li a.active {
+            color: #1a202c;
+            font-weight: 600; /* Plus gras pour la page active */
+        }
+
+        /* Le titre H1 est déplacé dans le main pour être plus contextuel à la page */
+        .page-title {
+            text-align: center;
+            color: #1a202c;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.2em; /* Grande taille pour un titre de page */
+            font-weight: 700;
+            margin-bottom: 50px;
+            padding-top: 30px;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background-color: #007bff; /* Ligne accentuée sous le titre */
+            border-radius: 2px;
+        }
+
+        /* Conteneur principal du configurateur */
+        main.configurator-container {
+            flex-grow: 1; /* Prend l'espace restant */
+            max-width: 1200px; /* Largeur maximale augmentée */
+            margin: 40px auto 60px auto; /* Centrage horizontal avec marges */
+            padding: 40px; /* Espacement interne généreux */
+            background-color: #ffffff; /* Fond blanc pur */
+            border-radius: 15px; /* Coins très arrondis */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Ombre plus douce et plus étendue */
+        }
+
+        /* Grille des catégories de composants */
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Grille responsive */
+            gap: 30px; /* Espacement entre les éléments de la grille */
+        }
+
+        /* Styles pour chaque catégorie de composants (carte) */
+        .component-category {
+            background-color: #fefefe; /* Fond presque blanc */
+            border: 1px solid #e9e9e9; /* Bordure très fine et douce */
+            border-radius: 12px; /* Coins arrondis */
+            padding: 25px; /* Espacement interne */
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06); /* Ombre légère pour chaque carte */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transitions douces */
+        }
+
+        .component-category:hover {
+            transform: translateY(-8px); /* Léger soulèvement au survol */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Ombre plus intense au survol */
+        }
+
+        .component-category h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #1a202c; /* Couleur des titres de catégorie */
+            font-size: 1.8em; /* Taille de police des titres de catégorie */
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 25px;
+            display: flex; /* Utilisation de Flexbox pour aligner l'icône et le texte */
+            align-items: center; /* Alignement vertical au centre */
+            border-bottom: 1px solid #f0f0f0; /* Ligne de séparation douce */
+            padding-bottom: 15px;
+        }
+
+        .component-category h3 i {
+            margin-right: 15px; /* Espacement à droite de l'icône */
+            color: #007bff; /* Couleur bleue pour les icônes */
+            font-size: 1.3em; /* Taille de l'icône */
+        }
+
+        .component-item {
+            display: flex; /* Utilisation de Flexbox */
+            flex-direction: column; /* Les éléments s'empilent verticalement */
+            margin-bottom: 20px; /* Marge inférieure */
+        }
+
+        .component-item label {
+            font-weight: 600; /* Texte en gras pour les labels */
+            margin-bottom: 12px; /* Marge inférieure */
+            color: #444; /* Couleur du texte */
+            font-size: 1.1em;
+        }
+
+        .component-item select {
+            width: 100%; /* Prend toute la largeur disponible */
+            padding: 14px 20px; /* Espacement interne généreux */
+            border: 1px solid #ddd; /* Bordure plus douce */
+            border-radius: 8px; /* Coins arrondis */
+            background-color: white; /* Fond blanc */
+            font-size: 1.05em; /* Taille de police */
+            color: #333;
+            appearance: none; /* Cache la flèche par défaut du select */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            /* Flèche personnalisée en SVG encodé en base64 */
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M287%2C197.971L146.202%2C57.173L5.404%2C197.971z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat; /* Ne pas répéter l'image de fond */
+            background-position: right 18px center; /* Position de la flèche */
+            background-size: 16px; /* Taille de la flèche */
+            cursor: pointer; /* Curseur pointeur au survol */
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.05); /* Ombre interne légère */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .component-item select:hover {
+            border-color: #a8d6ff;
+        }
+
+        .component-item select:focus {
+            border-color: #007bff; /* Bordure bleue au focus */
+            outline: none; /* Supprime l'outline par défaut */
+            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.2); /* Ombre de focus plus douce */
+        }
+
+        /* Sommaire du total */
+        .summary {
+            text-align: right; /* Texte aligné à droite */
+            margin-top: 60px; /* Marge supérieure augmentée */
+            padding-top: 40px; /* Espacement interne supérieur */
+            border-top: 2px solid #e0e0e0; /* Ligne de séparation douce */
+            display: flex; /* Utilisation de Flexbox */
+            justify-content: flex-end; /* Aligne les éléments à la fin (droite) */
+            align-items: center; /* Alignement vertical au centre */
+            gap: 30px; /* Espacement entre le texte et le bouton */
+        }
+
+        .summary p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em; /* Taille de police du texte "Total estimé" */
+            font-weight: 700; /* Texte en gras */
+            color: #28a745; /* Vert vif pour le total */
+            margin: 0; /* Supprime les marges par défaut du paragraphe */
+        }
+
+        .summary #total {
+            font-size: 3.5em; /* Taille de police plus grande pour le montant total */
+            color: #1e7e34; /* Vert encore plus foncé pour le chiffre */
+        }
+
+        .summary button {
+            background-color: #007bff; /* Bleu principal pour le bouton acheter */
+            color: white; /* Couleur du texte du bouton */
+            padding: 18px 35px; /* Espacement interne généreux */
+            border: none; /* Pas de bordure */
+            border-radius: 10px; /* Coins arrondis */
+            font-size: 1.4em; /* Taille de police du bouton */
+            font-weight: 600;
+            cursor: pointer; /* Curseur pointeur au survol */
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Transitions douces */
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3); /* Ombre pour le bouton */
+        }
+
+        .summary button:hover {
+            background-color: #0056b3; /* Bleu plus foncé au survol */
+            transform: translateY(-5px); /* Léger déplacement vers le haut au survol */
+            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4); /* Ombre plus intense au survol */
+        }
+
+        .summary button:active {
+            transform: translateY(0); /* Retour à la position normale au clic */
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2); /* Ombre réduite au clic */
+        }
+
+        /* Pied de page */
+        footer {
+            background-color: #1a202c; /* Même bleu très foncé que l'en-tête */
+            color: #cbd5e0; /* Gris clair pour le texte du pied de page */
+            text-align: center; /* Texte centré */
+            padding: 30px 0; /* Espacement interne */
+            margin-top: auto; /* Pousse le pied de page vers le bas */
+            font-size: 0.95em; /* Taille de police */
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Ombre au-dessus du pied de page */
+        }
+
+        footer p {
+            margin: 0;
+            margin-bottom: 15px; /* Marge inférieure */
+        }
+
+        .social-links a {
+            color: #cbd5e0; /* Couleur des liens sociaux */
+            font-size: 2em; /* Taille de police des icônes */
+            margin: 0 18px; /* Espacement entre les icônes */
+            transition: color 0.3s ease, transform 0.2s ease; /* Transitions douces */
+        }
+
+        .social-links a:hover {
+            color: #007bff; /* Couleur bleue au survol */
+            transform: translateY(-4px); /* Léger déplacement vers le haut */
+        }
+
+        /* Media Queries pour la responsivité (adaptation aux différentes tailles d'écran) */
+        @media (max-width: 1024px) {
+            header {
+                padding: 20px 30px;
+            }
+            header nav ul li {
+                margin-left: 30px;
+            }
+            .page-title {
+                font-size: 2.8em;
+            }
+            main.configurator-container {
+                max-width: 95%;
+                margin: 30px auto 50px auto;
+                padding: 30px;
+            }
+            .components-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 25px;
+            }
+            .component-category h3 {
+                font-size: 1.6em;
+            }
+            .summary p {
+                font-size: 2em;
+            }
+            .summary #total {
+                font-size: 3em;
+            }
+            .summary button {
+                padding: 15px 30px;
+                font-size: 1.2em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column; /* Les éléments de l'en-tête s'empilent verticalement */
+                text-align: center;
+                padding: 15px 20px;
+            }
+            header .logo {
+                margin-bottom: 10px;
+            }
+            header nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap; /* Permet aux liens de passer à la ligne */
+                justify-content: center; /* Centre les liens */
+            }
+            header nav ul li {
+                margin: 8px 15px; /* Réduit l'espacement entre les liens */
+            }
+            .page-title {
+                font-size: 2.2em;
+                margin-bottom: 40px;
+            }
+            .page-title::after {
+                width: 100px;
+            }
+            main.configurator-container {
+                margin: 20px 15px 40px auto;
+                padding: 25px;
+            }
+            .components-grid {
+                grid-template-columns: 1fr; /* Une seule colonne sur les tablettes/mobiles */
+                gap: 20px;
+            }
+            .component-category h3 {
+                font-size: 1.4em;
+            }
+            .component-item label {
+                font-size: 1em;
+            }
+            .component-item select {
+                font-size: 1em;
+                padding: 12px 15px;
+                background-position: right 12px center;
+                background-size: 14px;
+            }
+            .summary {
+                flex-direction: column; /* Les éléments du sommaire s'empilent verticalement */
+                align-items: center; /* Centre les éléments */
+                gap: 20px;
+            }
+            .summary p {
+                font-size: 1.8em;
+                margin-right: 0;
+            }
+            .summary #total {
+                font-size: 2.5em;
+            }
+            .summary button {
+                padding: 12px 25px;
+                font-size: 1.1em;
+            }
+            footer {
+                padding: 20px 0;
+            }
+            footer p {
+                margin-bottom: 10px;
+            }
+            .social-links a {
+                font-size: 1.6em;
+                margin: 0 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 10px 15px;
+            }
+            header .logo {
+                font-size: 1.8em;
+            }
+            header nav ul li {
+                margin: 5px 10px;
+            }
+            header nav ul li a {
+                font-size: 0.95em;
+            }
+            .page-title {
+                font-size: 1.8em;
+                margin-bottom: 30px;
+            }
+            .page-title::after {
+                width: 80px;
+            }
+            main.configurator-container {
+                margin: 15px 10px 30px auto;
+                padding: 15px;
+            }
+            .component-category h3 {
+                font-size: 1.2em;
+                padding-bottom: 10px;
+            }
+            .component-category h3 i {
+                font-size: 1.1em;
+                margin-right: 10px;
+            }
+            .component-item label {
+                font-size: 0.95em;
+                margin-bottom: 8px;
+            }
+            .component-item select {
+                font-size: 0.95em;
+                padding: 10px 15px;
+                background-position: right 10px center;
+                background-size: 12px;
+            }
+            .summary {
+                gap: 15px;
+                margin-top: 40px;
+                padding-top: 25px;
+            }
+            .summary p {
+                font-size: 1.5em;
+            }
+            .summary #total {
+                font-size: 2em;
+            }
+            .summary button {
+                font-size: 1em;
+                padding: 10px 20px;
+            }
+            footer {
+                padding: 15px 0;
+            }
+            footer p {
+                font-size: 0.85em;
+            }
+            .social-links a {
+                font-size: 1.4em;
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html">FRhardware</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="produit.html" class="active">Configurateur</a></li>
+                <li><a href="condition.html">Conditions</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="configurator-container">
+        <h1 class="page-title">Créez votre PC sur mesure</h1>
+
+        <div class="components-grid">
+            <section class="component-category">
+                <h3><i class="fas fa-microchip"></i> Processeur</h3>
+                <div class="component-item">
+                    <label for="processor">Sélectionnez un processeur:</label>
+                    <select id="processor">
+                        <option value="" data-price="0" data-socket="">Sélectionnez un processeur</option>
+                        <option value="Intel i5" data-price="300" data-socket="LGA1700">Intel i5 (LGA1700) - 300€</option>
+                        <option value="Intel i7" data-price="500" data-socket="LGA1700">Intel i7 (LGA1700) - 500€</option>
+                        <option value="AMD Ryzen 5" data-price="350" data-socket="AM4">AMD Ryzen 5 (AM4) - 350€</option>
+                        <option value="AMD Ryzen 7" data-price="550" data-socket="AM4">AMD Ryzen 7 (AM4) - 550€</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="component-category">
+                <h3><i class="fas fa-memory"></i> Carte Graphique</h3>
+                <div class="component-item">
+                    <label for="gpu">Sélectionnez une carte graphique:</label>
+                    <select id="gpu">
+                        <option value="" data-price="0">Sélectionnez une carte graphique</option>
+                        <option value="NVIDIA GTX 1660" data-price="200">NVIDIA GTX 1660 - 200€</option>
+                        <option value="NVIDIA RTX 3060" data-price="500">NVIDIA RTX 3060 - 500€</option>
+                        <option value="AMD Radeon RX 5700" data-price="400">AMD Radeon RX 5700 - 400€</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="component-category">
+                <h3><i class="fas fa-sd-card"></i> Mémoire RAM</h3>
+                <div class="component-item">
+                    <label for="ram">Sélectionnez de la RAM:</label>
+                    <select id="ram">
+                        <option value="" data-price="0">Sélectionnez de la RAM</option>
+                        <option value="8GB" data-price="50">8GB - 50€</option>
+                        <option value="16GB" data-price="100">16GB - 100€</option>
+                        <option value="32GB" data-price="200">32GB - 200€</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="component-category">
+                <h3><i class="fas fa-hdd"></i> Carte Mère</h3>
+                <div class="component-item">
+                    <label for="motherboard">Sélectionnez une Carte Mère:</label>
+                    <select id="motherboard">
+                        <option value="" data-price="0" data-socket="">Sélectionnez une Carte Mère</option>
+                        <option value="ASUS ROG Strix Z690-E Gaming WiFi" data-price="299" data-socket="LGA1700">ASUS ROG Strix Z690-E Gaming WiFi (LGA1700) - 299€</option>
+                        <option value="MSI MAG B550 TOMAHAWK WIFI" data-price="190" data-socket="AM4">MSI MAG B550 TOMAHAWK WIFI (AM4) - 190€</option>
+                        <option value="Gigabyte AORUS X570 Master" data-price="335" data-socket="AM4">Gigabyte AORUS X570 Master (AM4) - 335€</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="component-category">
+                <h3><i class="fas fa-server"></i> Stockage Principal</h3>
+                <div class="component-item">
+                    <label for="storage">Sélectionnez un stockage:</label>
+                    <select id="storage">
+                        <option value="" data-price="0">Sélectionnez un stockage</option>
+                        <option value="1TB HDD" data-price="60">1TB HDD - 60€</option>
+                        <option value="512GB SSD" data-price="40">512GB SSD - 40€</option>
+                        <option value="1TB SSD" data-price="100">1TB SSD - 100€</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="component-category">
+                <h3><i class="fas fa-fan"></i> Refroidissement (Ventirad/AIO)</h3>
+                <div class="component-item">
+                    <label for="ventirad">Sélectionnez un Ventirad/AIO:</label>
+                    <select id="ventirad">
+                        <option value="" data-price="0">Sélectionnez un Ventirad/AIO</option>
+                        <option value="Noctua NH-D15" data-price="149">Noctua NH-D15 - 149€</option>
+                        <option value="Corsair iCUE H150i Elite Capellix" data-price="199">Corsair iCUE H150i Elite Capellix - 199€</option>
+                        <option value="NZXT Kraken X73" data-price="179">NZXT Kraken X73 - 179€</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="component-category">
+                <h3><i class="fas fa-box-open"></i> Boîtier</h3>
+                <div class="component-item">
+                    <label for="boitier">Sélectionnez un Boîtier:</label>
+                    <select id="boitier">
+                        <option value="" data-price="0">Sélectionnez un Boîtier</option>
+                        <option value="NZXT H510 Elite" data-price="130">NZXT H510 Elite - 130€</option>
+                        <option value="Fractal Design Meshify C" data-price="120">Fractal Design Meshify C - 120€</option>
+                        <option value="Corsair iCUE 4000X RGB" data-price="160">Corsair iCUE 4000X RGB - 160€</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="component-category">
+                <h3><i class="fas fa-windows"></i> Système d'Exploitation (OS)</h3>
+                <div class="component-item">
+                    <label for="os">Sélectionnez un OS:</label>
+                    <select id="os">
+                        <option value="" data-price="0">Sélectionnez un OS</option>
+                        <option value="Windows 10 professionnel" data-price="50">Windows 10 professionnel - 50€</option>
+                        <option value="Windows 11 Familly" data-price="40">Windows 11 Familly - 40€</option>
+                        <option value="Windows 11 professionnel" data-price="70">Windows 11 professionnel - 70€</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="component-category">
+                <h3><i class="fas fa-hdd"></i> Stockage Supplémentaire</h3>
+                <div class="component-item">
+                    <label for="storageplus">Sélectionnez un stockage supplémentaire:</label>
+                    <select id="storageplus">
+                        <option value="" data-price="0">Sélectionnez un stockage supplémentaire</option>
+                        <option value="1TB HDD" data-price="60">1TB HDD - 60€</option>
+                        <option value="512GB SSD" data-price="40">512GB SSD - 40€</option>
+                        <option value="1TB SSD" data-price="100">1TB SSD - 100€</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="component-category">
+                <h3><i class="fas fa-wifi"></i> Carte Réseau</h3>
+                <div class="component-item">
+                    <label for="reseau">Sélectionnez une Carte Réseau:</label>
+                    <select id="reseau">
+                        <option value="" data-price="0">Sélectionnez une Carte Réseau</option>
+                        <option value="TP-Link Archer T9E" data-price="105">TP-Link Archer T9E - 105€</option>
+                        <option value="ASUS PCE-AX3000" data-price="50">ASUS PCE-AX3000 - 50€</option>
+                        <option value="Intel Wi-Fi 6E AX200" data-price="80">Intel Wi-Fi 6E AX200 - 80€</option>
+                    </select>
+                </div>
+            </section>
+        </div> 
+        <div class="summary">
+            <p>Total estimé: <span id="total">0€</span></p>
+            <button id="buy-button">Acheter cette configuration</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FRhardware. Tous droits réservés.</p>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const processorSelect = document.getElementById('processor');
+            const motherboardSelect = document.getElementById('motherboard');
+            const allSelects = document.querySelectorAll('.component-category select'); // Inclut tous les selects pour le calcul du total
+            const totalElement = document.getElementById('total');
+            const buyButton = document.getElementById('buy-button');
+
+            // Sauvegarder toutes les options d'origine de la carte mère
+            const originalMotherboardOptions = Array.from(motherboardSelect.options);
+
+            /**
+             * Filtre les options de la carte mère en fonction du processeur sélectionné.
+             */
+            function filterMotherboards() {
+                const selectedProcessorOption = processorSelect.options[processorSelect.selectedIndex];
+                const selectedProcessorSocket = selectedProcessorOption.dataset.socket;
+
+                // Réinitialiser les options de la carte mère
+                motherboardSelect.innerHTML = '';
+
+                let compatibleMotherboardFound = false;
+
+                // Ajouter l'option par défaut
+                const defaultOption = document.createElement('option');
+                defaultOption.value = "";
+                defaultOption.textContent = "Sélectionnez une Carte Mère";
+                defaultOption.dataset.price = "0";
+                defaultOption.dataset.socket = "";
+                motherboardSelect.appendChild(defaultOption);
+
+                originalMotherboardOptions.forEach(option => {
+                    if (option.value === "") return; // Skip the original default option
+
+                    const motherboardSocket = option.dataset.socket;
+
+                    if (selectedProcessorSocket === "" || motherboardSocket === selectedProcessorSocket) {
+                        const clonedOption = option.cloneNode(true);
+                        motherboardSelect.appendChild(clonedOption);
+                        if (clonedOption.value === selectedProcessorOption.value) { // Tentative de présélection si la carte mère est compatible
+                             clonedOption.selected = true;
+                        }
+                        compatibleMotherboardFound = true;
+                    }
+                });
+
+                 // Si la carte mère actuellement sélectionnée n'est plus compatible, la désélectionner
+                 const currentMotherboard = motherboardSelect.value;
+                 const currentMotherboardOption = motherboardSelect.options[motherboardSelect.selectedIndex];
+
+                 if (currentMotherboardOption && currentMotherboardOption.dataset.socket !== selectedProcessorSocket && selectedProcessorSocket !== "") {
+                     motherboardSelect.value = ""; // Désélectionner
+                 } else if (selectedProcessorSocket === "") {
+                     motherboardSelect.value = ""; // Désélectionner si le processeur est désélectionné
+                 }
+
+                calculateTotal(); // Recalculer le total après le filtrage
+            }
+
+            /**
+             * Filtre les options du processeur en fonction de la carte mère sélectionnée.
+             */
+            function filterProcessors() {
+                const selectedMotherboardOption = motherboardSelect.options[motherboardSelect.selectedIndex];
+                const selectedMotherboardSocket = selectedMotherboardOption.dataset.socket;
+
+                // Sauvegarder la valeur du processeur actuellement sélectionné pour tenter de la conserver
+                const currentProcessorValue = processorSelect.value;
+                
+                // Réinitialiser les options du processeur
+                processorSelect.innerHTML = '';
+
+                // Ajouter l'option par défaut
+                const defaultOption = document.createElement('option');
+                defaultOption.value = "";
+                defaultOption.textContent = "Sélectionnez un processeur";
+                defaultOption.dataset.price = "0";
+                defaultOption.dataset.socket = "";
+                processorSelect.appendChild(defaultOption);
+
+                let newProcessorSelected = false;
+
+                // On doit récupérer les options d'origine des processeurs pour pouvoir les restaurer
+                const originalProcessorOptions = [ // Mettez ici toutes vos options d'origine pour le processeur
+                    { value: "", textContent: "Sélectionnez un processeur", price: "0", socket: "" },
+                    { value: "Intel i5", textContent: "Intel i5 (LGA1700) - 300€", price: "300", socket: "LGA1700" },
+                    { value: "Intel i7", textContent: "Intel i7 (LGA1700) - 500€", price: "500", socket: "LGA1700" },
+                    { value: "AMD Ryzen 5", textContent: "AMD Ryzen 5 (AM4) - 350€", price: "350", socket: "AM4" },
+                    { value: "AMD Ryzen 7", textContent: "AMD Ryzen 7 (AM4) - 550€", price: "550", socket: "AM4" }
+                ];
+
+                originalProcessorOptions.forEach(data => {
+                    if (data.value === "") return;
+
+                    if (selectedMotherboardSocket === "" || data.socket === selectedMotherboardSocket) {
+                        const option = document.createElement('option');
+                        option.value = data.value;
+                        option.textContent = data.textContent;
+                        option.dataset.price = data.price;
+                        option.dataset.socket = data.socket;
+                        processorSelect.appendChild(option);
+                        if (data.value === currentProcessorValue) {
+                            option.selected = true;
+                            newProcessorSelected = true;
+                        }
+                    }
+                });
+
+                // Si le processeur précédemment sélectionné n'est plus compatible, le désélectionner
+                if (!newProcessorSelected && selectedMotherboardSocket !== "") {
+                    processorSelect.value = "";
+                } else if (selectedMotherboardSocket === "") {
+                     processorSelect.value = ""; // Désélectionner si la carte mère est désélectionnée
+                }
+                
+                calculateTotal(); // Recalculer le total après le filtrage
+            }
+
+
+            /**
+             * Calcule le total des prix des composants sélectionnés.
+             */
+            function calculateTotal() {
+                let total = 0;
+                allSelects.forEach(select => {
+                    const selectedOption = select.options[select.selectedIndex];
+                    const price = parseFloat(selectedOption.dataset.price || 0);
+                    total += price;
+                });
+                totalElement.textContent = `${total.toFixed(2)}€`; // Assure 2 décimales pour les prix
+            }
+
+            // Attache les écouteurs d'événements
+            processorSelect.addEventListener('change', filterMotherboards);
+            motherboardSelect.addEventListener('change', filterProcessors);
+
+
+            // Ajoute un écouteur d'événements 'change' à tous les autres <select> pour le calcul du total
+            allSelects.forEach(select => {
+                if (select.id !== 'processor' && select.id !== 'motherboard') { // Évite de double-attacher pour CPU/CM
+                    select.addEventListener('change', calculateTotal);
+                }
+            });
+
+            // Gère le bouton d'achat
+            if (buyButton) {
+                buyButton.addEventListener('click', function() {
+                    const currentTotal = parseFloat(totalElement.textContent.replace('€', ''));
+                    if (currentTotal > 0) {
+                        alert(`Vous allez acheter cette configuration pour un total de ${currentTotal}€.`);
+                        // Ici, tu pourrais ajouter la logique pour la commande,
+                        // comme une redirection vers une page de paiement ou l'envoi de données.
+                    } else {
+                        alert("Veuillez sélectionner au moins un composant.");
+                    }
+                });
+            }
+
+            // Initialiser les filtres au chargement de la page pour les options par défaut
+            filterMotherboards();
+            filterProcessors();
+            calculateTotal(); // Calculer le total initial
+        });
+    </script>
+</body>
+</html>

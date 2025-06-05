@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="msapplication-TileImage" content="logo.jpg">
+    <title>FRhardware - Conditions Générales de Vente</title>
+    <link rel="icon" type="image/jpg" href="images/logo.jpg">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Styles généraux pour le corps de la page */
+        body {
+            font-family: 'Open Sans', sans-serif; /* Police moderne et professionnelle */
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8; /* Fond très clair, presque blanc */
+            color: #333; /* Couleur de texte par défaut */
+            line-height: 1.8; /* Hauteur de ligne pour une meilleure lisibilité, légèrement augmentée pour le texte long */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* La page prend au moins toute la hauteur de la vue */
+            overflow-x: hidden; /* Empêche le défilement horizontal */
+        }
+
+        /* Styles de l'en-tête (copié de produit.html et politique_confidentialite.html) */
+        header {
+            background-color: #ffffff; /* Fond blanc pour l'en-tête */
+            color: #1a202c; /* Texte sombre */
+            padding: 20px 50px; /* Espacement interne généreux */
+            display: flex; /* Utilisation de Flexbox pour l'alignement des éléments */
+            justify-content: space-between; /* Espacement équitable entre les éléments */
+            align-items: center; /* Alignement vertical au centre */
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08); /* Ombre douce et subtile */
+            position: sticky; /* L'en-tête reste en haut au défilement */
+            top: 0;
+            z-index: 100; /* Assure que l'en-tête est au-dessus des autres éléments */
+        }
+
+        header .logo {
+            font-family: 'Montserrat', sans-serif; /* Police distincte pour le logo */
+            font-size: 2.2em; /* Taille de police plus grande pour le logo */
+            font-weight: 700; /* Texte en gras */
+            letter-spacing: 0.5px; /* Espacement des lettres */
+        }
+
+        header .logo a {
+            color: #1a202c; /* Couleur sombre pour le logo */
+            text-decoration: none; /* Pas de soulignement */
+            transition: color 0.3s ease;
+        }
+
+        header .logo a:hover {
+            color: #007bff; /* Bleu vif au survol */
+        }
+
+        header nav ul {
+            list-style: none; /* Supprime les puces de liste */
+            margin: 0;
+            padding: 0;
+            display: flex; /* Utilisation de Flexbox pour les éléments de navigation */
+        }
+
+        header nav ul li {
+            margin-left: 40px; /* Espacement entre les éléments de navigation */
+        }
+
+        header nav ul li a {
+            color: #555; /* Gris moyen pour les liens de navigation */
+            text-decoration: none; /* Pas de soulignement */
+            font-size: 1.05em; /* Taille de police des liens */
+            font-weight: 500; /* Poids de police moyen */
+            transition: color 0.3s ease, transform 0.2s ease; /* Transitions douces */
+            position: relative;
+            padding-bottom: 5px; /* Espace pour la ligne de survol */
+        }
+
+        header nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #007bff; /* Ligne bleue au survol/actif */
+            transition: width 0.3s ease-in-out;
+        }
+
+        header nav ul li a:hover::after,
+        header nav ul li a.active::after {
+            width: 100%;
+        }
+
+        header nav ul li a:hover {
+            color: #1a202c; /* Noir au survol */
+            transform: translateY(-2px); /* Léger déplacement vers le haut */
+        }
+
+        header nav ul li a.active {
+            color: #1a202c;
+            font-weight: 600; /* Plus gras pour la page active */
+        }
+
+        /* Conteneur principal des CGV */
+        main.cgv-container {
+            flex-grow: 1; /* Prend l'espace restant */
+            max-width: 900px; /* Largeur maximale pour le texte */
+            margin: 40px auto 60px auto; /* Centrage horizontal avec marges */
+            padding: 40px; /* Espacement interne généreux */
+            background-color: #ffffff; /* Fond blanc pur */
+            border-radius: 15px; /* Coins très arrondis */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Ombre plus douce et plus étendue */
+        }
+
+        main.cgv-container h1 {
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            color: #1a202c;
+            font-size: 3.2em; /* Grande taille pour le titre principal */
+            font-weight: 700;
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        main.cgv-container h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background-color: #007bff; /* Ligne accentuée sous le titre */
+            border-radius: 2px;
+        }
+
+        .section {
+            margin-bottom: 30px; /* Espacement entre les sections */
+            padding-bottom: 20px; /* Espacement interne en bas de chaque section */
+            border-bottom: 1px solid #e0e0e0; /* Ligne de séparation douce */
+        }
+
+        .section:last-child {
+            border-bottom: none; /* Pas de bordure pour la dernière section */
+            margin-bottom: 0;
+        }
+
+        .section h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #1a202c;
+            font-size: 2em;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .section p {
+            font-size: 1.05em;
+            color: #555;
+            margin-bottom: 1em;
+        }
+
+        /* Pied de page (copié de produit.html et politique_confidentialite.html) */
+        footer {
+            background-color: #1a202c; /* Même bleu très foncé que l'en-tête */
+            color: #cbd5e0; /* Gris clair pour le texte du pied de page */
+            text-align: center; /* Texte centré */
+            padding: 30px 0; /* Espacement interne */
+            margin-top: auto; /* Pousse le pied de page vers le bas */
+            font-size: 0.95em; /* Taille de police */
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Ombre au-dessus du pied de page */
+        }
+
+        footer p {
+            margin: 0;
+            margin-bottom: 15px; /* Marge inférieure */
+        }
+
+        .footer-links {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #cbd5e0;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #007bff;
+        }
+
+        .social-links a {
+            color: #cbd5e0; /* Couleur des liens sociaux */
+            font-size: 2em; /* Taille de police des icônes */
+            margin: 0 18px; /* Espacement entre les icônes */
+            transition: color 0.3s ease, transform 0.2s ease; /* Transitions douces */
+        }
+
+        .social-links a:hover {
+            color: #007bff; /* Couleur bleue au survol */
+            transform: translateY(-4px); /* Léger déplacement vers le haut */
+        }
+
+        /* Media Queries pour la responsivité */
+        @media (max-width: 1024px) {
+            header {
+                padding: 20px 30px;
+            }
+            header nav ul li {
+                margin-left: 30px;
+            }
+            main.cgv-container {
+                max-width: 95%;
+                margin: 30px auto 50px auto;
+                padding: 30px;
+            }
+            main.cgv-container h1 {
+                font-size: 2.8em;
+            }
+            main.cgv-container h1::after {
+                width: 100px;
+            }
+            .section h2 {
+                font-size: 1.8em;
+            }
+            .section p {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px 20px;
+            }
+            header .logo {
+                margin-bottom: 10px;
+            }
+            header nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            header nav ul li {
+                margin: 8px 15px;
+            }
+            main.cgv-container {
+                margin: 20px 15px 40px auto;
+                padding: 25px;
+            }
+            main.cgv-container h1 {
+                font-size: 2.2em;
+                margin-bottom: 40px;
+            }
+            main.cgv-container h1::after {
+                width: 80px;
+            }
+            .section {
+                margin-bottom: 25px;
+                padding-bottom: 15px;
+            }
+            .section h2 {
+                font-size: 1.5em;
+            }
+            .section p {
+                font-size: 0.95em;
+            }
+            footer {
+                padding: 20px 0;
+            }
+            footer p {
+                margin-bottom: 10px;
+            }
+            .footer-links a {
+                margin: 0 10px;
+            }
+            .social-links a {
+                font-size: 1.6em;
+                margin: 0 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 10px 15px;
+            }
+            header .logo {
+                font-size: 1.8em;
+            }
+            header nav ul li {
+                margin: 5px 10px;
+            }
+            header nav ul li a {
+                font-size: 0.95em;
+            }
+            main.cgv-container {
+                margin: 15px 10px 30px auto;
+                padding: 15px;
+            }
+            main.cgv-container h1 {
+                font-size: 1.8em;
+                margin-bottom: 30px;
+            }
+            main.cgv-container h1::after {
+                width: 60px;
+            }
+            .section {
+                margin-bottom: 20px;
+                padding-bottom: 10px;
+            }
+            .section h2 {
+                font-size: 1.3em;
+            }
+            .section p {
+                font-size: 0.9em;
+            }
+            footer {
+                padding: 15px 0;
+            }
+            footer p {
+                font-size: 0.85em;
+            }
+            .footer-links a {
+                font-size: 0.9em;
+                margin: 0 8px;
+            }
+            .social-links a {
+                font-size: 1.4em;
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">FRhardware</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="produit.html">Configurateur</a></li>
+                <li><a href="condition.html" class="active">Conditions</a></li>
+                <li><a href="politique_confidentialite.html">Politique de Confidentialité</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="cgv-container">
+        <h1>Conditions Générales de Vente</h1>
+        
+        <section class="introduction section">
+            <p>Bienvenue sur le site de <strong>FRhardware</strong>. Avant de procéder à l'achat de nos produits ou services, nous vous invitons à prendre connaissance des conditions générales de vente ci-dessous. Ces conditions s'appliquent à toutes les commandes passées sur notre site.</p>
+        </section>
+
+        <section class="article section">
+            <h2>Article 1 - Objet</h2>
+            <p>Les présentes conditions générales de vente ont pour objet de définir les modalités de vente des produits et services proposés sur le site <strong>FRhardware</strong>.</p>
+        </section>
+
+        <section class="article section">
+            <h2>Article 2 - Commandes</h2>
+            <p>Les commandes sont considérées comme fermes et définitives dès leur validation par le client sur le site. En validant sa commande, le client accepte sans réserve les présentes conditions générales.</p>
+        </section>
+
+        <section class="article section">
+            <h2>Article 3 - Prix</h2>
+            <p>Les prix des produits sont indiqués en euros, toutes taxes comprises (TTC), sauf mention contraire. Les frais de livraison sont ajoutés lors du processus de commande.</p>
+        </section>
+
+        <section class="article section">
+            <h2>Article 4 - Modalités de Paiement</h2>
+            <p>Le paiement des produits s'effectue lors de la commande par carte bancaire, PayPal ou tout autre moyen de paiement proposé sur le site. Le paiement est sécurisé grâce à des systèmes de cryptage de données.</p>
+        </section>
+
+        <section class="article section">
+            <h2>Article 5 - Livraison</h2>
+            <p>Les produits seront expédiés à l'adresse de livraison indiquée par le client lors de sa commande. Les délais de livraison varient en fonction de la destination et du mode de livraison choisi.</p>
+        </section>
+
+        <section class="article section">
+            <h2>Article 6 - Droit de Rétractation</h2>
+            <p>Conformément à la loi, le client dispose d'un délai de 14 jours à compter de la réception de sa commande pour exercer son droit de rétractation, sans avoir à justifier de motifs ni à payer de pénalités, à l'exception des frais de retour.</p>
+        </section>
+
+        <section class="article section">
+            <h2>Article 7 - Garanties</h2>
+            <p>Les produits vendus bénéficient de la garantie légale de conformité ainsi que de la garantie des vices cachés, conformément aux dispositions des articles L. 217-4 et suivants du Code de la consommation.</p>
+        </section>
+
+        <section class="article section">
+            <h2>Article 8 - Responsabilité</h2>
+            <p>FRhardware ne saurait être tenue responsable des dommages résultant d'une mauvaise utilisation des produits. De même, notre responsabilité ne pourra être engagée en cas de force majeure (grève, intempéries, etc.).</p>
+        </section>
+
+        <section class="article section">
+            <h2>Article 9 - Données Personnelles</h2>
+            <p>Les informations personnelles recueillies lors de la commande sont nécessaires au traitement de celle-ci. Le client dispose d'un droit d'accès, de modification et de suppression des données qui le concernent.</p>
+        </section>
+
+        <section class="article section">
+            <h2>Article 10 - Loi Applicable</h2>
+            <p>Les présentes conditions générales de vente sont soumises à la loi française. En cas de litige, les tribunaux français seront compétents.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FRhardware. Tous droits réservés.</p>
+        <div class="footer-links">
+            <a href="index.html">Accueil</a>
+            <a href="produit.html">Configurateur</a>
+            <a href="condition.html">Conditions Générales</a>
+            <a href="politique_confidentialite.html">Politique de Confidentialité</a>
+        </div>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mise à jour du style pour le lien "Conditions" dans l'en-tête
+            document.querySelector('header nav ul li a[href="condition.html"]').classList.add('active');
+        });
+    </script>
+</body>
+</html>

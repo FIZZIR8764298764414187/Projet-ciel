@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="msapplication-TileImage" content="logo.jpg">
+    <title>FRhardware - Politique de Confidentialité</title>
+    <link rel="icon" type="image/jpg" href="images/logo.jpg">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Styles généraux pour le corps de la page */
+        body {
+            font-family: 'Open Sans', sans-serif; /* Police moderne et professionnelle */
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8; /* Fond très clair, presque blanc */
+            color: #333; /* Couleur de texte par défaut */
+            line-height: 1.8; /* Hauteur de ligne pour une meilleure lisibilité, légèrement augmentée pour le texte long */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* La page prend au moins toute la hauteur de la vue */
+            overflow-x: hidden; /* Empêche le défilement horizontal */
+        }
+
+        /* Styles de l'en-tête (copié de produit.html) */
+        header {
+            background-color: #ffffff; /* Fond blanc pour l'en-tête */
+            color: #1a202c; /* Texte sombre */
+            padding: 20px 50px; /* Espacement interne généreux */
+            display: flex; /* Utilisation de Flexbox pour l'alignement des éléments */
+            justify-content: space-between; /* Espacement équitable entre les éléments */
+            align-items: center; /* Alignement vertical au centre */
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08); /* Ombre douce et subtile */
+            position: sticky; /* L'en-tête reste en haut au défilement */
+            top: 0;
+            z-index: 100; /* Assure que l'en-tête est au-dessus des autres éléments */
+        }
+
+        header .logo {
+            font-family: 'Montserrat', sans-serif; /* Police distincte pour le logo */
+            font-size: 2.2em; /* Taille de police plus grande pour le logo */
+            font-weight: 700; /* Texte en gras */
+            letter-spacing: 0.5px; /* Espacement des lettres */
+        }
+
+        header .logo a {
+            color: #1a202c; /* Couleur sombre pour le logo */
+            text-decoration: none; /* Pas de soulignement */
+            transition: color 0.3s ease;
+        }
+
+        header .logo a:hover {
+            color: #007bff; /* Bleu vif au survol */
+        }
+
+        header nav ul {
+            list-style: none; /* Supprime les puces de liste */
+            margin: 0;
+            padding: 0;
+            display: flex; /* Utilisation de Flexbox pour les éléments de navigation */
+        }
+
+        header nav ul li {
+            margin-left: 40px; /* Espacement entre les éléments de navigation */
+        }
+
+        header nav ul li a {
+            color: #555; /* Gris moyen pour les liens de navigation */
+            text-decoration: none; /* Pas de soulignement */
+            font-size: 1.05em; /* Taille de police des liens */
+            font-weight: 500; /* Poids de police moyen */
+            transition: color 0.3s ease, transform 0.2s ease; /* Transitions douces */
+            position: relative;
+            padding-bottom: 5px; /* Espace pour la ligne de survol */
+        }
+
+        header nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #007bff; /* Ligne bleue au survol/actif */
+            transition: width 0.3s ease-in-out;
+        }
+
+        header nav ul li a:hover::after,
+        header nav ul li a.active::after {
+            width: 100%;
+        }
+
+        header nav ul li a:hover {
+            color: #1a202c; /* Noir au survol */
+            transform: translateY(-2px); /* Léger déplacement vers le haut */
+        }
+
+        header nav ul li a.active {
+            color: #1a202c;
+            font-weight: 600; /* Plus gras pour la page active */
+        }
+
+        /* Titre de la page (similaire à page-title de produit.html) */
+        .page-title {
+            text-align: center;
+            color: #1a202c;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.2em; /* Grande taille pour un titre de page */
+            font-weight: 700;
+            margin-bottom: 50px;
+            padding-top: 30px;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background-color: #007bff; /* Ligne accentuée sous le titre */
+            border-radius: 2px;
+        }
+
+        /* Conteneur principal du contenu de la politique */
+        .privacy-content-container {
+            flex-grow: 1; /* Prend l'espace restant */
+            max-width: 900px; /* Largeur maximale pour le texte */
+            margin: 40px auto 60px auto; /* Centrage horizontal avec marges */
+            padding: 40px; /* Espacement interne généreux */
+            background-color: #ffffff; /* Fond blanc pur */
+            border-radius: 15px; /* Coins très arrondis */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Ombre plus douce et plus étendue */
+        }
+
+        .privacy-content-container h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #1a202c; /* Titres de section sombres */
+            font-size: 2em;
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0; /* Bordure claire */
+            padding-bottom: 10px;
+        }
+
+        .privacy-content-container h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #333; /* Sous-titres sombres */
+            font-size: 1.5em;
+            font-weight: 500;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .privacy-content-container p {
+            margin-bottom: 1em;
+            color: #555; /* Texte de paragraphe légèrement grisé */
+            font-size: 1.05em;
+        }
+
+        .privacy-content-container ul {
+            list-style: disc;
+            margin-left: 25px;
+            margin-bottom: 1em;
+            color: #555; /* Puces et texte de liste légèrement grisés */
+        }
+
+        .privacy-content-container ul li {
+            margin-bottom: 0.5em;
+        }
+
+        /* Pied de page (copié de produit.html) */
+        footer {
+            background-color: #1a202c; /* Même bleu très foncé que l'en-tête */
+            color: #cbd5e0; /* Gris clair pour le texte du pied de page */
+            text-align: center; /* Texte centré */
+            padding: 30px 0; /* Espacement interne */
+            margin-top: auto; /* Pousse le pied de page vers le bas */
+            font-size: 0.95em; /* Taille de police */
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Ombre au-dessus du pied de page */
+        }
+
+        footer p {
+            margin: 0;
+            margin-bottom: 15px; /* Marge inférieure */
+        }
+
+        .footer-links { /* Nouveau style pour les liens du pied de page */
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #cbd5e0;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #007bff; /* Bleu au survol */
+        }
+
+        .social-links a {
+            color: #cbd5e0; /* Couleur des liens sociaux */
+            font-size: 2em; /* Taille de police des icônes */
+            margin: 0 18px; /* Espacement entre les icônes */
+            transition: color 0.3s ease, transform 0.2s ease; /* Transitions douces */
+        }
+
+        .social-links a:hover {
+            color: #007bff; /* Bleu au survol */
+            transform: translateY(-4px); /* Léger déplacement vers le haut */
+        }
+
+        /* Media Queries pour la responsivité */
+        @media (max-width: 1024px) {
+            header {
+                padding: 20px 30px;
+            }
+            header nav ul li {
+                margin-left: 30px;
+            }
+            .page-title {
+                font-size: 2.8em;
+            }
+            .privacy-content-container {
+                max-width: 95%;
+                margin: 30px auto 50px auto;
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px 20px;
+            }
+            header .logo {
+                margin-bottom: 10px;
+            }
+            header nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            header nav ul li {
+                margin: 8px 15px;
+            }
+            .page-title {
+                font-size: 2.2em;
+                margin-bottom: 40px;
+            }
+            .page-title::after {
+                width: 100px;
+            }
+            .privacy-content-container {
+                margin: 20px 15px 40px auto;
+                padding: 25px;
+            }
+            .privacy-content-container h2 {
+                font-size: 1.8em;
+            }
+            .privacy-content-container h3 {
+                font-size: 1.3em;
+            }
+            .privacy-content-container p,
+            .privacy-content-container ul li {
+                font-size: 0.95em;
+            }
+            footer {
+                padding: 20px 0;
+            }
+            footer p {
+                margin-bottom: 10px;
+            }
+            .footer-links a {
+                margin: 0 10px;
+            }
+            .social-links a {
+                font-size: 1.6em;
+                margin: 0 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 10px 15px;
+            }
+            header .logo {
+                font-size: 1.8em;
+            }
+            header nav ul li {
+                margin: 5px 10px;
+            }
+            header nav ul li a {
+                font-size: 0.95em;
+            }
+            .page-title {
+                font-size: 1.8em;
+                margin-bottom: 30px;
+            }
+            .page-title::after {
+                width: 80px;
+            }
+            .privacy-content-container {
+                margin: 15px 10px 30px auto;
+                padding: 15px;
+            }
+            .privacy-content-container h2 {
+                font-size: 1.5em;
+            }
+            .privacy-content-container h3 {
+                font-size: 1.2em;
+            }
+            .privacy-content-container p,
+            .privacy-content-container ul li {
+                font-size: 0.9em;
+            }
+            footer {
+                padding: 15px 0;
+            }
+            footer p {
+                font-size: 0.85em;
+            }
+            .footer-links a {
+                font-size: 0.9em;
+                margin: 0 8px;
+            }
+            .social-links a {
+                font-size: 1.4em;
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html">FRhardware</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="produit.html">Configurateur</a></li>
+                <li><a href="condition.html">Conditions</a></li>
+                <li><a href="politique_confidentialite.html" class="active">Politique de Confidentialité</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="privacy-content-container">
+        <h1 class="page-title">Politique de Confidentialité</h1>
+
+        <p>Dernière mise à jour : 26 Mai 2025</p>
+
+        <p>FRhardware s'engage à protéger la confidentialité de ses utilisateurs. Cette Politique de Confidentialité décrit comment nous collectons, utilisons et partageons vos informations personnelles lorsque vous utilisez notre site web FRhardware.fr (le "Site").</p>
+
+        <h2>1. Informations que nous collectons</h2>
+        <h3>1.1 Informations que vous nous fournissez directement</h3>
+        <p>Lorsque vous utilisez notre configurateur de PC, nous collectons les informations que vous nous fournissez, telles que les choix de composants que vous effectuez. Si vous décidez d'acheter une configuration, nous pourrions collecter des informations nécessaires au traitement de la commande, telles que :</p>
+        <ul>
+            <li>Votre nom, adresse e-mail, adresse de livraison et numéro de téléphone.</li>
+            <li>Informations de paiement (traitées par des prestataires tiers sécurisés, nous ne stockons pas vos données de carte bancaire).</li>
+        </ul>
+
+        <h3>1.2 Informations collectées automatiquement</h3>
+        <p>Lorsque vous naviguez sur notre Site, nous pouvons collecter automatiquement certaines informations sur votre appareil, y compris :</p>
+        <ul>
+            <li>Votre adresse IP.</li>
+            <li>Le type de navigateur et le système d'exploitation.</li>
+            <li>Les pages que vous visitez sur notre Site et la durée de votre visite.</li>
+            <li>Les sites web de référence (d'où vous venez).</li>
+            <li>Des données d'utilisation agrégées et anonymisées pour l'analyse du trafic.</li>
+        </ul>
+        <p>Ces informations sont collectées à l'aide de cookies et de technologies similaires. Vous pouvez gérer vos préférences en matière de cookies via les paramètres de votre navigateur.</p>
+
+        <h2>2. Comment nous utilisons vos informations</h2>
+        <p>Nous utilisons les informations collectées aux fins suivantes :</p>
+        <ul>
+            <li>Pour fournir et maintenir le service du configurateur de PC.</li>
+            <li>Pour traiter vos commandes et livrer les produits.</li>
+            <li>Pour améliorer et personnaliser votre expérience sur le Site.</li>
+            <li>Pour analyser l'utilisation du Site et optimiser nos services.</li>
+            <li>Pour communiquer avec vous concernant votre commande, nos produits et nos promotions (si vous avez consenti à recevoir de telles communications).</li>
+            <li>Pour assurer la sécurité de notre Site et prévenir la fraude.</li>
+        </ul>
+
+        <h2>3. Partage de vos informations</h2>
+        <p>Nous ne vendons, n'échangeons ni ne louons vos informations personnelles à des tiers. Nous pouvons partager vos informations avec :</p>
+        <ul>
+            <li>Des prestataires de services tiers qui nous aident à exploiter notre Site et à fournir nos services (par exemple, traitement des paiements, livraison, analyse de données). Ces prestataires sont tenus de protéger vos informations et de ne les utiliser que pour les services qu'ils nous fournissent.</li>
+            <li>Les autorités compétentes si la loi l'exige ou si cela est nécessaire pour protéger nos droits ou la sécurité de nos utilisateurs.</li>
+        </ul>
+
+        <h2>4. Sécurité des données</h2>
+        <p>Nous mettons en œuvre des mesures de sécurité techniques et organisationnelles appropriées pour protéger vos informations personnelles contre l'accès non autorisé, la divulgation, l'altération ou la destruction. Cependant, aucune méthode de transmission sur Internet ou de stockage électronique n'est totalement sécurisée, et nous ne pouvons garantir une sécurité absolue.</p>
+
+        <h2>5. Vos droits</h2>
+        <p>Conformément aux lois sur la protection des données (comme le RGPD), vous disposez de certains droits concernant vos informations personnelles, notamment :</p>
+        <ul>
+            <li>Le droit d'accéder à vos données.</li>
+            <li>Le droit de rectification de vos données.</li>
+            <li>Le droit à l'effacement de vos données ("droit à l'oubli").</li>
+            <li>Le droit de limiter le traitement de vos données.</li>
+            <li>Le droit à la portabilité de vos données.</li>
+            <li>Le droit d'opposition au traitement de vos données.</li>
+        </ul>
+        <p>Pour exercer ces droits, veuillez nous contacter aux coordonnées indiquées ci-dessous.</p>
+
+        <h2>6. Modifications de cette Politique de Confidentialité</h2>
+        <p>Nous pouvons mettre à jour notre Politique de Confidentialité de temps à autre. Toute modification sera publiée sur cette page avec une date de "Dernière mise à jour" révisée. Nous vous encourageons à consulter régulièrement cette page pour prendre connaissance des éventuelles modifications.</p>
+
+        <h2>7. Nous contacter</h2>
+        <p>Si vous avez des questions concernant cette Politique de Confidentialité, veuillez nous contacter à :</p>
+        <p>Email : contact@frhardware.fr</p>
+        <p>Adresse : [Votre Adresse Complète, si applicable]</p>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FRhardware. Tous droits réservés.</p>
+        <div class="footer-links">
+            <a href="index.html">Accueil</a>
+            <a href="produit.html">Configurateur</a>
+            <a href="condition.html">Conditions Générales</a>
+            <a href="politique_confidentialite.html" class="active">Politique de Confidentialité</a>
+        </div>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Pas de script spécifique nécessaire pour cette page statique,
+            // mais le listener est maintenu par bonne pratique.
+        });
+    </script>
+</body>
+</html>
